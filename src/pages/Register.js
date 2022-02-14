@@ -8,15 +8,13 @@ const initialState = {
   email: "",
   password: "",
   isMember: true,
-  showAlert: true,
 };
 
 const Register = () => {
   const [values, setValues] = useState(initialState);
   // global state ad useNavigate
 
-  const state = useAppContext();
-  console.log(state);
+  const { showAlert, isLoading } = useAppContext();
 
   const toggleMember = () => {
     setValues({ ...values, isMember: !values.isMember });
@@ -36,7 +34,7 @@ const Register = () => {
       <form className="form" onSubmit={onSubmit}>
         <Logo />
         <h3>{values.isMember ? "Login" : "Register"}</h3>
-        {values.showAlert && <Alert />}
+        {showAlert && <Alert />}
         {/* name input  */}
         {!values.isMember && (
           <FormRow
