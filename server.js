@@ -3,14 +3,23 @@ const app = express();
 import dotenv from "dotenv";
 dotenv.config();
 
+// database connected
+import connectDB from "./db/connect.js";
+
+// routes
+import authRuter from "./routes/authRoutes.js";
+
 //import middleware
 import errorHandlerMidleware from "./middleware/error-handler.js";
 import notFoundMiddleware from "./middleware/not-found.js";
-import connectDB from "./db/connect.js";
+
+app.use(express.json());
 
 app.get("/", (req, res) => {
   res.send("Hello wrold");
 });
+
+app.use("/api/u1/auth", authRuter);
 
 // custom middleware
 app.use(notFoundMiddleware);
